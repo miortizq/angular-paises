@@ -1,0 +1,30 @@
+<h2>Búsquedas</h2>
+        <hr>
+        <!-- Adiciona el atributo routerLink para identificar la ruta definida en el path de la lista de rutas
+        Adiciona el atributo routerLinkActive para determinar que cuando se seleccione la opción del sideBarMenu
+        se active esa opción,
+        Adiciona el atributo routerLinkActiveOptions entre llaves cuadradas y le asigna el valor entre
+        llaves exact:true para que el active de la opción solo se active cuando se de clic en la misma y esto
+        sucede porque se tiene un path vacio
+        -->
+        <ul>
+            <li 
+                routerLink="" 
+                routerLinkActive="active" 
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="list-group-item">
+                Por País
+            </li>
+            <li 
+                routerLink="region" 
+                routerLinkActive="active" 
+                class="list-group-item">
+                Por Región
+            </li>
+            <li 
+                routerLink="capital" 
+                routerLinkActive="active" 
+                class="list-group-item">
+                Por Capital
+            </li>
+        </ul>

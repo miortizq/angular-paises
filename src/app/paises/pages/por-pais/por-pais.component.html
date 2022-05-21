@@ -1,0 +1,56 @@
+
+<h2>Por País</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <!-- Se especifica el evento en modo de escucha (por eso los parentesis) para identificar
+        en que momento se dispara y ejecuta la funcion buscar del componente padre 
+        Envía como parámetro el evento que es el resultado del input del html hijo
+        Se adiciona el parametro placeHolder correspondiente al decorador @Input del componente hijo
+        (pais-input.component) para enviar el texto de la caja-->
+        <app-pais-input (onEnter)="buscarPais( $event )"
+                        (onDebounce)="sugerencias( $event )"
+                        placeHolder='Buscar país ....'></app-pais-input>
+    </div>
+</div>
+<!-- Se crea la lista para presentar las sugerencias. Cada opción de la lista se envuelve en un 
+anchor (a) para dirigirlo a la pantalla de ver-pais 
+Se adiciona a la lista un nuevo item que permite mantener la funcionalidad actual de desplegar la
+lista. Se encierra entre comillas dobles el valor de búsqueda para que se tome literalmente el valor 
+del termino.
+Se adicioma un ngIf para presentar las cajas de sugerencias solamente si una variable predefinida
+se encuentra en true-->
+<ul *ngIf="mostrarSugerencias" class="list-group">
+    <li *ngFor="let paisSug of listaPaisesSugeridos" class="list-group-item list-group-item-action"> 
+        <a 
+            class="nav-link"
+            [routerLink]="['/alpha', paisSug.cca2]">
+            {{paisSug.name.common}}
+        </a>
+        
+    </li>
+    <li class="list-group-item list-group-item-action"
+    (click)="buscarPais(termino)"> 
+        <a class="nav-link">
+           Buscar "{{termino}}"
+        </a>
+        
+    </li>
+</ul>
+
+<hr>
+
+<div *ngIf="hayError" class="alert alert-danger">
+    No se encontró nada con el término {{termino}}
+</div>
+
+<div *ngIf="listaPaises.length>0" class="row">
+    <div class="col">
+        <!-- Después de especificar el decorador @Input en el componente hijo, se adiciona el 
+            @Input definido en el componente pais-tabla (entre llaves cuadradas para entender 
+            que es una definicion desde el componente) y se asigna la propiedad definida en
+            el componente por-pais  -->
+        <app-pais-tabla [arregloPaises]="listaPaises"></app-pais-tabla>
+    </div>
+</div>

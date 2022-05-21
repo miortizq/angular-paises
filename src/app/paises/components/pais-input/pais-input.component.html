@@ -1,0 +1,14 @@
+<!-- Adiciona el atributo ngModel en modo de escucha() / emisor[] para asignar el valor de la caja a 
+la variable termino del componente.
+Adiciona el evento input para disparar la función teclaPresionada y emitir el valor digitado en la caja
+Adiciona el atributo placeHolder para asignar el valor asignado al decorador @Input del componente-->
+<form (ngSubmit)="buscar()" autocomplete="off">
+    <input 
+        type="text"
+        name="termino"
+        class="form-control"  
+        [(ngModel)] = "termino" 
+        (input)="teclaPresionada()"
+        placeholder= {{placeHolder}}
+        >
+</form>

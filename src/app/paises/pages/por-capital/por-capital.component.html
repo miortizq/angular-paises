@@ -1,0 +1,31 @@
+<h2>Por Capital</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <!-- Se especifica el evento onEnter en modo de escucha (por eso los parentesis) para identificar
+        en que momento se dispara y ejecuta la funcion buscar del componente padre 
+        Envía como parámetro el evento que es el resultado del input del html hijo
+        Se adiciona el parametro placeHolder correspondiente al decorador @Input del componente hijo
+        (pais-input.component) para enviar el texto de la caja -->
+        <app-pais-input (onEnter)="buscarPais( $event )"
+                        (onDebounce)="sugerencias( $event )"
+                        placeHolder='Buscar capital ....'></app-pais-input>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="hayError" class="alert alert-danger">
+    No se encontró nada con el término {{termino}}
+</div>
+
+<div *ngIf="listaPaises.length>0" class="row">
+    <div class="col">
+        <!-- Después de especificar el decorador @Input en el componente hijo, se adiciona el 
+            @Input definido en el componente pais-tabla (entre llaves cuadradas para entender 
+            que es una definicion desde el componenente) y se asigna la propiedad definida en
+            el componente por-pais  -->
+        <app-pais-tabla [arregloPaises]="listaPaises"></app-pais-tabla>
+    </div>
+</div>

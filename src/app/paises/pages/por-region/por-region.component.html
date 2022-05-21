@@ -1,0 +1,46 @@
+
+<h3>Buscar por región <small>{{regionActiva | titlecase}}</small></h3>
+<hr>
+
+<h5>Seleccione la región </h5>
+
+<!-- modo1: se adiciona entre llaves cuadradas la clase : class.abc donde abc es el nombre de la clase
+            y el objeto va a obtener esta clase personalizada si retorna true. Esto implica que se puede
+            adicionar una condicion (=== literalmente igual ). Adcionalmente se puede cambiar el nombre 
+            de la clase personalizada por una defición css 
+            [class.btn-primary] = "region === regionActiva" 
+    modo2: se adiciona entre llaves cuadradas la directiva ngClass y se iguala a un objero de javascript
+            entre comillas se ingresan llaves de css que se aplican al objeto si la condición retorna
+            true. La condición se especifíca despues de : 
+            Se pueden especificar tantas clases como se deseen
+            [ngClass] = "{
+                'btn-primary' : regionActiva === region,
+                'btn-outline-primary' : regionActiva !== region
+            }"
+    modo3: entre llaves cuadradas se mete la propiedad class indicando que el valor asignado es un objeto
+            de javascript. Se puede definir una condición ternaria donde se evalua una sola situación y
+            de acuerdo a la respuesta aplica una clase o la otra
+            [class]="(regionActiva === region) ? 'btn btn-primary': 'btn btn-outline-primary'"
+    modo4: entre llaves cuadradas se mete la propiedad class indicando que el valor asignado es un objeto
+            de javascript. Se puede definir en el componente una función que evalue la condición y de
+            acuerdo al resultado aplica una clase o la otra. Esta función es llamada desde la clase
+    --> 
+<div class="row">
+    <div class="col">
+        <button *ngFor="let region of regiones"
+            [class]="getClaseCss(region)"            
+            (click) = "activarRegion(region); ">
+            {{region | titlecase}}
+        </button>
+    </div>
+</div>
+<hr>
+<div *ngIf="listaPaises.length>0" class="row">
+    <div class="col">
+        <!-- Después de especificar el decorador @Input en el componente hijo, se adiciona el 
+            @Input definido en el componente pais-tabla (entre llaves cuadradas para entender 
+            que es una definicion desde el componenente) y se asigna la propiedad definida en
+            el componente por-pais  -->
+        <app-pais-tabla [arregloPaises]="listaPaises"></app-pais-tabla>
+    </div>
+</div>
